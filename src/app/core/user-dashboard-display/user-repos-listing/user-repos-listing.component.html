@@ -1,0 +1,35 @@
+<div class="p-card-body">
+    <div class="repo-list">
+        <ng-container *ngIf="isRepoLoading; else repoList">
+            <app-loader [isRepoListLoading]="isRepoLoading"></app-loader>
+        </ng-container>
+
+        <ng-template #repoList>
+            <ng-container *ngIf="repos.length; else noRepos">
+                <ng-container *ngFor="let repo of repos">
+                    <div class="card-box p-col-12 p-md-6 p-lg-6 p-xl-4">
+                        <div class="p-card">
+                            <h3 class="repo-name">{{ repo.name }}</h3>
+                            <p class="repo-description">{{ repo.description }}</p>
+                            <div *ngIf="repo.language" class="repo-info">
+                                <div class="repo-info-item">
+                                    <div>{{ repo.language }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <ng-template #noRepos>
+                <div class="p-col-12 p-text-center">
+                    <p>No public repositories found!</p>
+                </div>
+            </ng-template>
+        </ng-template>
+    </div>
+
+    <div *ngIf="!isRepoLoading && publicRepoLength" class="repo-paginator p-grid p-justify-center">
+        <p-paginator [pageLinkSize]="10" [totalRecords]="totalRepos" [rowsPerPageOptions]="[10, 15, 25, 50, 100]"
+            [rows]="pageSize" [first]="first" (onPageChange)="loadRepos($event)"></p-paginator>
+    </div>
+</div>

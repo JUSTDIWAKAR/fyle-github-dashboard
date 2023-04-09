@@ -1,0 +1,26 @@
+<ng-container *ngIf="isProfileLoading">
+    <div class="profile-card">
+        <div class="profile-card-body">
+            <div class="profile-pic">
+                <div class="profile-card-avatar p-skeleton"></div>
+            </div>
+            <div class="profile-card-info">
+                <div class="profile-card-name p-skeleton"></div>
+                <div class="profile-card-bio p-skeleton"></div>
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="isProfileLoading || isRepoListLoading">
+        <div class="repo-list">
+            <ng-container *ngFor="let repo of [].constructor(4)">
+                <div class="card-box p-col-12 p-md-6 p-lg-6 p-xl-4">
+                    <div class="p-card">
+                        <div class="p-skeleton p-card-body"></div>
+                        <div class="p-skeleton p-card-footer"></div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+</ng-container>
